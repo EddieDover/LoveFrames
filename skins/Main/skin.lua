@@ -21,23 +21,23 @@ local bordercolor = {143, 143, 143, 255}
 skin.controls = {}
 
 -- frame
-skin.controls.frame_border_color 					= bordercolor
-skin.controls.frame_body_color 						= {255, 255, 255, 150}
-skin.controls.frame_top_color						= {102, 194, 255, 255}
-skin.controls.frame_name_color						= {255, 255, 255, 255}
-skin.controls.frame_name_font						= smallfont
+skin.controls.frame_border_color 					= decorations.frame.border.color
+skin.controls.frame_body_color 						= decorations.frame.body.color
+skin.controls.frame_top_color						= decorations.frame.top.color
+skin.controls.frame_name_color						= decorations.frame.name.color
+skin.controls.frame_name_font						= decorations.frame.name.font
 
 -- button
-skin.controls.button_border_down_color				= bordercolor
-skin.controls.button_border_nohover_color			= bordercolor
-skin.controls.button_border_hover_color				= bordercolor
-skin.controls.button_body_down_color				= {128, 204, 255, 255}
-skin.controls.button_body_nohover_color				= {255, 255, 255, 255}
-skin.controls.button_body_hover_color				= {153, 214, 255, 255}
-skin.controls.button_text_down_color				= {255, 255, 255, 255}
-skin.controls.button_text_nohover_color				= {0, 0, 0, 200}
-skin.controls.button_text_hover_color				= {255, 255, 255, 255}
-skin.controls.button_text_font 						= smallfont
+skin.controls.button_border_down_color				= decorations.button.border.colors.down
+skin.controls.button_border_nohover_color			= decorations.button.border.colors.nohover
+skin.controls.button_border_hover_color				= decorations.button.border.colors.hover
+skin.controls.button_body_down_color				= decorations.button.body.colors.down
+skin.controls.button_body_nohover_color				= decorations.button.body.colors.nohover
+skin.controls.button_body_hover_color				= decorations.button.body.colors.hover
+skin.controls.button_text_down_color				= decorations.button.text.colors.down
+skin.controls.button_text_nohover_color				= decorations.button.text.colors.nohover
+skin.controls.button_text_hover_color				= decorations.button.text.colors.hover
+skin.controls.button_text_font 						= decorations.button.text.font
 
 -- image button
 skin.controls.imagebutton_text_down_color			= {255, 255, 255, 255}
@@ -276,39 +276,50 @@ function skin.DrawFrame(object)
 	love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), object:GetHeight())
 	love.graphics.setColor(unpack(skin.controls.frame_body_color))
 
-	-- frame top bar
-	love.graphics.setColor(unpack(skin.controls.frame_top_color))
-	love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), 25)
+	--[[ BEGIN TEMPLATE TESTING ]]--
 
-	gradientcolor = {skin.controls.frame_top_color[1] - 20, skin.controls.frame_top_color[2] - 20, skin.controls.frame_top_color[3] - 20, 255}
-	skin.DrawGradient(object:GetX(), object:GetY(), object:GetWidth(), 25, "up", gradientcolor)
+	-- frame top bar
+	if (skin.images[decorations.frame.top.images.topleft = nil)
+		love.graphics.setColor(unpack(skin.controls.frame_top_color))
+		love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), 25)
+
+
+		gradientcolor = {skin.controls.frame_top_color[1] - 20, skin.controls.frame_top_color[2] - 20, skin.controls.frame_top_color[3] - 20, 255}
+		skin.DrawGradient(object:GetX(), object:GetY(), object:GetWidth(), 25, "up", gradientcolor)
+
+	end
 
 	if (decorations.frame.hasBorder == true) then
 		love.graphics.setColor(unpack(skin.controls.frame_border_color))
-		skin.OutlinedRectangle(object:GetX(), object:GetY() + 25, object:GetWidth(), decorations.frame.border.thickness)
+		skin.OutlinedRectangle(object:GetX(),
+			object:GetY() + 25,
+			object:GetWidth(),
+			decorations.frame.border.thickness
+			)
 	end
 
-	--[[ BEGIN TEMPLATE TESTING ]]--
-
 	-- Draw Top Left Corner
-	if (skin.images[decorations.frame.top_left] ~= nil) then
-		love.graphics.draw(skin.images[decorations.frame.top_left],object:GetX(),object:GetY())
+	if (skin.images[decorations.frame.top.images.top_left] ~= nil) then
+		love.graphics.draw(skin.images[decorations.frame.top.images.top_left],
+			object:GetX(),
+			object:GetY()
+			)
 	end
 
 	-- Draw Top
-	if (skin.images[decorations.frame.top] ~= nil) then
-		skin.DrawRepeatingImage(skin.imagepaths[decorations.frame.top], --Image
-			object:GetX()+skin.images[decorations.frame.top]:getWidth(), -- Object X + skin width
+	if (skin.images[decorations.frame.top.images.top_center] ~= nil) then
+		skin.DrawRepeatingImage(skin.imagepaths[decorations.frame.top.images.top_center], --Image
+			object:GetX()+skin.images[decorations.frame.top.images.top_center]:getWidth(), -- Object X + skin width
 			object:GetY(), -- Object Y
-			object:GetWidth() - (skin.images[decorations.frame.top]:getWidth()*2), -- Dest Length = object Width minus 2xWidth of image? Why is this?
-			skin.images[decorations.frame.top]:getHeight()
+			object:GetWidth() - (skin.images[decorations.frame.top.images.top_center]:getWidth()*2), -- Dest Length = object Width minus 2xWidth of image? Why is this?
+			skin.images[decorations.frame.top.images.top_center]:getHeight()
 			)
 	end
 
 	-- Drop Top Right Corner
-	if (skin.images[decorations.frame.top_right] ~= nil) then
-		love.graphics.draw(skin.images[decorations.frame.top_right],
-			object:GetX() + object:GetWidth() - skin.images[decorations.frame.top_right]:getWidth(),
+	if (skin.images[decorations.frame.top.images.top_right] ~= nil) then
+		love.graphics.draw(skin.images[decorations.frame.top.images.top_right],
+			object:GetX() + object:GetWidth() - skin.images[decorations.frame.top.images.top_right]:getWidth(),
 			object:GetY()
 			)
 	end
