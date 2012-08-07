@@ -14,9 +14,9 @@ loveframes.info.stage 	= "Alpha"
 
 -- library configurations
 loveframes.config = {}
-loveframes.config["DIRECTORY"] 			= "libraries/loveframes"
-loveframes.config["DEFAULTSKIN"]		= "Blue"
-loveframes.config["ACTIVESKIN"]	   		= "Blue"
+loveframes.config["DIRECTORY"] 			= "libs/loveframes"
+loveframes.config["DEFAULTSKIN"]		= "Main"
+loveframes.config["ACTIVESKIN"]	   		= "Main"
 loveframes.config["INDEXSKINIMAGES"]	= true
 loveframes.config["DEBUG"]				= true
 
@@ -29,38 +29,38 @@ loveframes.modalobject 	= false
 	- desc: loads the library
 --]]---------------------------------------------------------
 function loveframes.load()
-	
+
 	-- install directory of the library
 	local dir = loveframes.config["DIRECTORY"]
-	
+
 	-- require the internal base libraries
 	require(dir .. "/third-party/middleclass/middleclass")
 	require(dir .. "/util")
 	require(dir .. "/skins")
 	require(dir .. "/templates")
 	require(dir .. "/debug")
-	
+
 	-- create a list of gui objects and skins
 	local objects = loveframes.util.GetDirContents(dir .. "/objects")
 	local skins = loveframes.util.GetDirContents(dir .. "/skins")
-	
+
 	-- loop through a list of all gui objects and require them
 	for k, v in ipairs(objects) do
 		if v.extension == "lua" then
 			require(v.path .. "/" ..v.name)
 		end
 	end
-	
+
 	-- loop through a list of all gui skins and require them
 	for k, v in ipairs(skins) do
 		if v.extension == "lua" then
 			require(v.path .. "/" ..v.name)
 		end
 	end
-	
+
 	-- create the base gui object
 	loveframes.base = base:new()
-	
+
 end
 
 --[[---------------------------------------------------------
@@ -70,7 +70,7 @@ end
 function loveframes.update(dt)
 
 	local object = loveframes.base
-	
+
 	object:update(dt)
 
 end
@@ -82,16 +82,16 @@ end
 function loveframes.draw()
 
 	local object = loveframes.base
-	
+
 	-- set the drawcount to zero
 	loveframes.drawcount = 0
-	
+
 	-- draw the base object
 	object:draw()
-	
+
 	-- draw the debug library
 	loveframes.debug.draw()
-	
+
 end
 
 --[[---------------------------------------------------------
@@ -101,9 +101,9 @@ end
 function loveframes.mousepressed(x, y, button)
 
 	local object = loveframes.base
-	
+
 	object:mousepressed(x, y, button)
-	
+
 end
 
 --[[---------------------------------------------------------
@@ -113,13 +113,13 @@ end
 function loveframes.mousereleased(x, y, button)
 
 	local object = loveframes.base
-	
+
 	object:mousereleased(x, y, button)
-	
+
 	if button == "l" then
 		loveframes.hoverobject = false
 	end
-	
+
 end
 
 --[[---------------------------------------------------------
@@ -129,9 +129,9 @@ end
 function loveframes.keypressed(key, unicode)
 
 	local object = loveframes.base
-	
+
 	object:keypressed(key, unicode)
-	
+
 end
 
 --[[---------------------------------------------------------
@@ -141,9 +141,9 @@ end
 function loveframes.keyreleased(key)
 
 	local object = loveframes.base
-	
+
 	object:keyreleased(key)
-	
+
 end
 
 --[[---------------------------------------------------------
@@ -155,10 +155,10 @@ end
 function loveframes.Create(data, parent)
 
 	if type(data) == "string" then
-	
+
 		-- create the new object
 		local object = _G[data]:new()
-		
+
 		if object.internal == true then
 			if object.type == "tooltip" then
 				object = tooltip:new()
@@ -166,50 +166,50 @@ function loveframes.Create(data, parent)
 				return
 			end
 		end
-		
+
 		-- parent the new object by default to the base gui object
 		object.parent = loveframes.base
 		table.insert(loveframes.base.children, object)
-		
+
 		-- if the parent argument is not nil, make that argument the object's new parent
 		if parent ~= nil then
 			object:SetParent(parent)
 		end
-		
+
 		-- return the object for further manipulation
 		return object
-		
+
 	elseif type(data) == "table" then
 
 		-- table for creation of multiple objects
 		local objects = {}
-		
+
 		-- this function reads a table that contains a layout of object properties and then
 		-- creates objects based on those properties
 		local function CreateObjects(t, o, c)
-		
+
 			local child = c or false
-			
+
 			for k, v in pairs(t) do
-			
+
 				-- current default object
 				local object = _G[v.type]:new()
-				
+
 				-- indert the object into the table of objects being created
 				table.insert(objects, object)
-				
+
 				-- parent the new object by default to the base gui object
 				object.parent = loveframes.base
 				table.insert(loveframes.base.children, object)
-				
+
 				if o then
 					object:SetParent(o)
 				end
-				
+
 				-- loop through the current layout table and assign the properties found
 				-- to the current object
 				for i, j in pairs(v) do
-					
+
 					if i ~= "children" and i ~= "func" then
 						if child == true then
 							if i == "x" then
@@ -225,24 +225,24 @@ function loveframes.Create(data, parent)
 					elseif i == "children" then
 						CreateObjects(j, object, true)
 					end
-					
+
 				end
-				
+
 				if v.func then
 					v.func(object)
 				end
-				
+
 			end
-			
+
 		end
-		
+
 		-- create the objects
 		CreateObjects(data)
-		
+
 		return objects
-		
+
 	end
-	
+
 end
 
 -- load the library

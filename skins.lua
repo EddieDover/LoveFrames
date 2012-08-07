@@ -7,7 +7,7 @@ loveframes.skins = {}
 loveframes.skins.available = {}
 
 function loveframes.skins.Register(skin)
-	
+
 	local name = skin.name
 	local author = skin.author
 	local version = skin.version
@@ -16,37 +16,39 @@ function loveframes.skins.Register(skin)
 	local dircheck = love.filesystem.isDirectory(dir)
 	local images = loveframes.util.GetDirContents(dir .. "/images")
 	local indeximages = loveframes.config["INDEXSKINIMAGES"]
-	
+
 	if name == "" or name == nil then
 		error("Could not register skin: Invalid or missing name data.")
 	end
-	
+
 	if author == "" or author == nil then
 		error("Could not register skin: Invalid or missing author data.")
 	end
-	
+
 	if version == "" or version == nil then
 		error("Could not register skin: Invalid or missing version data.")
 	end
-	
+
 	if namecheck ~= nil then
 		error("Could not register skin: A skin with the name '" ..name.. "' already exists.")
 	end
-	
+
 	if dircheck == false then
 		error("Could not register skin: Could not find a directory for skin '" ..name.. "'.")
 	end
-	
+
 	loveframes.skins.available[name] = skin
 	loveframes.skins.available[name].dir = dir
 	loveframes.skins.available[name].images = {}
-	
+	loveframes.skins.available[name].imagepaths = {}
+
 	if #images > 0 and indeximages == true then
-	
+
 		for k, v in ipairs(images) do
 			loveframes.skins.available[name].images[v.name .. "." .. v.extension] = love.graphics.newImage(v.fullpath)
+			loveframes.skins.available[name].imagepaths[v.name .. "." .. v.extension] = v.fullpath
 		end
-		
+
 	end
-	
+
 end
