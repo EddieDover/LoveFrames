@@ -279,7 +279,7 @@ function skin.DrawFrame(object)
 	--[[ BEGIN TEMPLATE TESTING ]]--
 
 	-- frame top bar
-	if (skin.images[decorations.frame.top.images.topleft = nil)
+	if (skin.images[decorations.frame.top.images.topleft] == nil) then
 		love.graphics.setColor(unpack(skin.controls.frame_top_color))
 		love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), 25)
 

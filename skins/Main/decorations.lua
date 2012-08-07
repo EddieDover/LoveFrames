@@ -11,6 +11,8 @@ decorations.button.border				= {}
 decorations.button.border.colors		= {}
 decorations.button.body					= {}
 decorations.button.body.colors			= {}
+decorations.button.text					= {}
+decorations.button.text.colors			= {}
 
 decorations.frame.hasBorder				= false
 
