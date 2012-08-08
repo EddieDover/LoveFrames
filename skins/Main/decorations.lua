@@ -3,6 +3,7 @@ decorations = {}
 decorations.frame 						= {}
 decorations.frame.border				= {}
 decorations.frame.body 					= {}
+decorations.frame.body.images			= {}
 decorations.frame.top					= {}
 decorations.frame.top.images			= {}
 decorations.frame.name					= {}
@@ -20,7 +21,9 @@ decorations.frame.border.color			= {143, 143, 143, 255}
 decorations.frame.border.thickness		= 1
 
 decorations.frame.body.color			= {255, 255, 255, 150}
+decorations.frame.body.images.background = "frame-top-center.png"
 
+decorations.frame.top.height			= 25
 decorations.frame.top.color				= {102, 194, 255, 255}
 decorations.frame.top.images.top_center	= "frame-top-center.png"
 decorations.frame.top.images.top_left	= "frame-top-left.png"

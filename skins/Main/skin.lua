@@ -272,11 +272,19 @@ function skin.DrawFrame(object)
 
 	local gradientcolor = {}
 
+	--[[ BEGIN TEMPLATE TESTING ]]--
+
 	-- frame body
 	love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), object:GetHeight())
 	love.graphics.setColor(unpack(skin.controls.frame_body_color))
 
-	--[[ BEGIN TEMPLATE TESTING ]]--
+	if (decorations.frame.body.images.background ~= nil) then
+		skin.DrawRepeatingImage(skin.imagepaths[decorations.frame.body.images.background],
+			object:GetX() + skin.images[decorations.frame.body.images.background]:getWidth(),
+			object:GetY() + decorations.frame.top.height,
+			object:GetWidth() - (skin.images[decorations.frame.body.images.background]:getWidth() *2),
+			object:GetHeight() - decorations.frame.top.height) - (skin.images[decorations.frame.body.images.background]:getHeight()))
+	end
 
 	-- frame top bar
 	if (skin.images[decorations.frame.top.images.topleft] == nil) then
