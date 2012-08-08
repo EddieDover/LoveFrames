@@ -1,5 +1,5 @@
 --[[------------------------------------------------
-	-- LÖVE Frames --
+	-- LÃ–VE Frames --
 	-- By Nikolai Resokav --
 --]]------------------------------------------------
 
@@ -15,8 +15,8 @@ loveframes.info.stage 	= "Alpha"
 -- library configurations
 loveframes.config = {}
 loveframes.config["DIRECTORY"] 			= "libs/loveframes"
-loveframes.config["DEFAULTSKIN"]		= "Main"
-loveframes.config["ACTIVESKIN"]	   		= "Main"
+loveframes.config["DEFAULTSKIN"]		= "Blue"
+loveframes.config["ACTIVESKIN"]	   		= "Blue"
 loveframes.config["INDEXSKINIMAGES"]	= true
 loveframes.config["DEBUG"]				= true
 
