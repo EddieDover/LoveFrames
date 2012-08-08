@@ -21,9 +21,9 @@ decorations.frame.border.color			= {143, 143, 143, 255}
 decorations.frame.border.thickness		= 1
 
 decorations.frame.body.color			= {255, 255, 255, 150}
-decorations.frame.body.images.background = "frame-top-center.png"
+decorations.frame.body.images.background = "frame-body.png"
 
-decorations.frame.top.height			= 25
+--decorations.frame.top.height			= 25
 decorations.frame.top.color				= {102, 194, 255, 255}
 decorations.frame.top.images.top_center	= "frame-top-center.png"
 decorations.frame.top.images.top_left	= "frame-top-left.png"

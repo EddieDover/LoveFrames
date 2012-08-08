@@ -1,5 +1,5 @@
 --[[------------------------------------------------
-	-- LÖVE Frames --
+	-- LÃ–VE Frames --
 	-- By Nikolai Resokav --
 --]]------------------------------------------------
 
@@ -275,26 +275,26 @@ function skin.DrawFrame(object)
 	--[[ BEGIN TEMPLATE TESTING ]]--
 
 	-- frame body
-	love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), object:GetHeight())
-	love.graphics.setColor(unpack(skin.controls.frame_body_color))
-
-	if (decorations.frame.body.images.background ~= nil) then
+  if (decorations.frame.body.images.background ~= nil) then
+        
 		skin.DrawRepeatingImage(skin.imagepaths[decorations.frame.body.images.background],
 			object:GetX() + skin.images[decorations.frame.body.images.background]:getWidth(),
-			object:GetY() + decorations.frame.top.height,
+			object:GetY() + skin.images[decorations.frame.top.images.top_center]:getHeight(),
 			object:GetWidth() - (skin.images[decorations.frame.body.images.background]:getWidth() *2),
-			object:GetHeight() - decorations.frame.top.height) - (skin.images[decorations.frame.body.images.background]:getHeight()))
+			object:GetHeight() - skin.images[decorations.frame.top.images.top_center]:getHeight() - (skin.images[decorations.frame.body.images.background]:getHeight()) )
+  else
+    love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), object:GetHeight())
+    love.graphics.setColor(unpack(skin.controls.frame_body_color))
 	end
+  
 
 	-- frame top bar
-	if (skin.images[decorations.frame.top.images.topleft] == nil) then
+	if (skin.images[decorations.frame.top.images.top_left] == nil) then
 		love.graphics.setColor(unpack(skin.controls.frame_top_color))
-		love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), 25)
-
-
 		gradientcolor = {skin.controls.frame_top_color[1] - 20, skin.controls.frame_top_color[2] - 20, skin.controls.frame_top_color[3] - 20, 255}
 		skin.DrawGradient(object:GetX(), object:GetY(), object:GetWidth(), 25, "up", gradientcolor)
-
+  else
+    love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), skin.images[decorations.frame.top.images.top_center]:getHeight())
 	end
 
 	if (decorations.frame.hasBorder == true) then
