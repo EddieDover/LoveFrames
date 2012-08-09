@@ -286,7 +286,7 @@ function skin.DrawFrame(object)
   else
     love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), object:GetHeight())
     love.graphics.setColor(unpack(skin.controls.frame_body_color))
-	--end
+	end
 
 
 	-- frame top bar
