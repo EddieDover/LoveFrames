@@ -206,7 +206,8 @@ end
 --]]---------------------------------------------------------
 function skin.DrawRepeatingImage(image, x, y, width, height)
 
-	local image = love.graphics.newImage(image)
+	local image = image
+	--local image = love.graphics.newImage(image)
 	local iwidth = image:getWidth()
 	local iheight = image:getHeight()
 	local cords = {}
@@ -276,8 +277,8 @@ function skin.DrawFrame(object)
 
 	-- frame body
   if (decorations.frame.body.images.background ~= nil) then
-        
-		skin.DrawRepeatingImage(skin.imagepaths[decorations.frame.body.images.background],
+
+		skin.DrawRepeatingImage(skin.images[decorations.frame.body.images.background],
 			object:GetX() + skin.images[decorations.frame.body.images.background]:getWidth(),
 			object:GetY() + skin.images[decorations.frame.top.images.top_center]:getHeight(),
 			object:GetWidth() - (skin.images[decorations.frame.body.images.background]:getWidth() *2),
@@ -285,8 +286,8 @@ function skin.DrawFrame(object)
   else
     love.graphics.rectangle("fill", object:GetX(), object:GetY(), object:GetWidth(), object:GetHeight())
     love.graphics.setColor(unpack(skin.controls.frame_body_color))
-	end
-  
+	--end
+
 
 	-- frame top bar
 	if (skin.images[decorations.frame.top.images.top_left] == nil) then
@@ -316,7 +317,7 @@ function skin.DrawFrame(object)
 
 	-- Draw Top
 	if (skin.images[decorations.frame.top.images.top_center] ~= nil) then
-		skin.DrawRepeatingImage(skin.imagepaths[decorations.frame.top.images.top_center], --Image
+		skin.DrawRepeatingImage(skin.images[decorations.frame.top.images.top_center], --Image
 			object:GetX()+skin.images[decorations.frame.top.images.top_center]:getWidth(), -- Object X + skin width
 			object:GetY(), -- Object Y
 			object:GetWidth() - (skin.images[decorations.frame.top.images.top_center]:getWidth()*2), -- Dest Length = object Width minus 2xWidth of image? Why is this?
